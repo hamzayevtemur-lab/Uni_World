@@ -140,6 +140,31 @@ async def delete_comment(comment_id: int):
         return {"message": "Comment deleted"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    
+@app.get("/setup-db")
+def setup_database():
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        cursor.execute("""
+        CREATE TABLE IF NOT EXISTS comments (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(100),
+            country VARCHAR(100),
+            rating INT,
+            comment_text TEXT,
+            is_approved BOOLEAN DEFAULT FALSE,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+        """)
+
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return {"message": "Database table created successfully"}
+    except Exception as e:
+        return {"error": str(e)}
 
 
 
