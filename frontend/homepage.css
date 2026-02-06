@@ -231,7 +231,7 @@
 
   .hero-image:first-child {
       grid-row: 1 / 3;
-      background-image: url(images/image1.webp);
+      background-image: url(/static/images/image1.webp);
   }
 
   .hero-image:nth-child(2) {
@@ -242,7 +242,7 @@
 
   .hero-image:nth-child(3) {
       height: 200px;
-      background-image: url(images/image3.webp);
+      background-image: url(/static/images/image3.webp);
   }
 
 
