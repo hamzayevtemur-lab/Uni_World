@@ -54,6 +54,10 @@ def get_db_connection():
 async def serve_home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
+@app.get("/admin")
+async def serve_admin(request: Request):
+    return templates.TemplateResponse("admin.html", {"request": request})
+
 # Get all approved comments
 @app.get("/api/comments", response_model=List[Comment])
 async def get_comments():
