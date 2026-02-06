@@ -10,8 +10,8 @@ from fastapi import Request
 import os
 
 app = FastAPI()
-app.mount("/static", StaticFiles(directory="static"), name="static")
-templates = Jinja2Templates(directory="templates")
+app.mount("/static", StaticFiles(directory="frontend"), name="static")
+templates = Jinja2Templates(directory="frontend")
 
 # CORS settings - Allow your frontend domain
 app.add_middleware(
