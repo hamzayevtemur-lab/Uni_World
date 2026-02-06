@@ -683,7 +683,7 @@ function updateContactInfo(lang) {
 
 
 // API Configuration
-const API_URL = 'http://127.0.0.1:8000';  // Change to your backend URL
+const API_URL = 'https://uni-world.onrender.com'; 
 
 let allCommentsShown = false;
 

@@ -4,9 +4,14 @@ from pydantic import BaseModel
 from typing import List, Optional
 import mysql.connector
 from datetime import datetime
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from fastapi import Request
 import os
 
 app = FastAPI()
+app.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="templates")
 
 # CORS settings - Allow your frontend domain
 app.add_middleware(
@@ -44,6 +49,10 @@ class Comment(BaseModel):
 # Database connection
 def get_db_connection():
     return mysql.connector.connect(**DB_CONFIG)
+
+@app.get("/")
+async def serve_home(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
 
 # Get all approved comments
 @app.get("/api/comments", response_model=List[Comment])
